@@ -5,3 +5,7 @@ secret_config.yaml
 
 #for testing
 /src/cache/
+
+#data
+/data/*
+!/data/scrape_data.py
