@@ -1,5 +1,7 @@
-config.yaml
+secret_config.yaml
 /src/__pycache__
+/src/scraper_files/*
+!/src/scraper_files/.gitkeep
 
 #for testing
 /src/cache/
