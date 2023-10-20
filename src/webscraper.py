@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import yaml
+import os
 
 #init
 MAX_REPORT_SIZE = 0
@@ -34,6 +35,13 @@ def search_for_schools(school_string):
     request = requests.get(data_url)
     soup = BeautifulSoup(request.content, "html.parser")
 
+    #delete all pdfs
+    for i, filename in enumerate(os.listdir("./src/cache/")):
+        file_path = os.path.join("./src/cache/", filename)
+        # checking if it is a file
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+
     #fetch all reports
     tbody = soup.select_one("tbody")
     for i in range(int(MAX_REPORT_SIZE)):
@@ -48,9 +56,9 @@ def search_for_schools(school_string):
         label = str(td_text.contents[0]).strip()
         label = label[6:]
 
-        pdf = open("./src/cache/"+label+str(i)+".pdf", 'wb')
+        pdf = open("./src/cache/"+label+"n"+str(i)+".pdf", 'wb')
         pdf.write(response.content)
         pdf.close()
 
 if __name__ == "__main__":
-    search_for_schools("Gymnázium, Plzeň")
+    search_for_schools("Církevní gymnázium Plzeň")
