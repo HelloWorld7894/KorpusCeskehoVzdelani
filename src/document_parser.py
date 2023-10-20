@@ -60,11 +60,15 @@ def parse_docs():
 
             text_obj["label"] = file_path.replace("./src/cache/", "").replace(".pdf", "")[:-2]
             text_obj["text"] = bot_parse
+            
+            #charlen = len(text_obj["text"])
+            #if charlen > 13000: #this is hardcoded
+            #    text_obj["text"] = bot_parse[int(3 * (charlen / 4)):]
 
-            print(text_obj["label"])
-            print(len(text_obj["text"]))
 
-    return text_obj
+            all_text.append(text_obj)
+
+    return all_text
 
 if __name__ == "__main__":
     print(os.getcwd())

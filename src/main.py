@@ -20,9 +20,15 @@ def main():
 def handle_connection(data):
     print("Got a connection! " + data)
 
-    web_input = "Gymnázium, Plzeň, mikulášské nám."
+    web_input = "Církevní gymnázium Plzeň"
 
     webscraper.search_for_schools(web_input)
+    output = document_parser.parse_docs()
+
+    #feed to ChatGPT
+    for out_obj in output:
+        out = process_data.prompt(out_obj["text"])
+        print(out)
 
     #load data
     socketio.emit("data", "data_test")
