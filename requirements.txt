@@ -2,3 +2,4 @@ flask
 numpy
 flask-socketio
 openai
+PyPDF2

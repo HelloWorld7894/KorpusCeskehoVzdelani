@@ -2,9 +2,12 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO
 
 import process_data
+import document_parser
 
+#init
 app = Flask(__name__, template_folder='templates', static_folder='static')
 socketio = SocketIO(app)
+process_data.set_classification()
 
 @app.route("/")
 def main():
