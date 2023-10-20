@@ -12,7 +12,7 @@ START_PROMPT = """
 Mohl by jsi fungovat jako model co bude hodnotit školu ve škále od 0 do 10 podle textu co ti zde zadám? Zpráva vždy bude začínat slovem analyzuj. Přičemž odpověď musí za každých okolností vždy být pouze to číslo
 """
 
-with open("config.yaml", "r") as stream:
+with open("secret_config.yaml", "r") as stream:
     try:
         API_KEY = yaml.safe_load(stream)["api-key"]
     except yaml.YAMLError as exc:
