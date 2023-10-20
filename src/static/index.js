@@ -5,5 +5,8 @@ socket.on('connect', function() {
 });
 
 socket.on("data", (message) => {
-    console.log("Got a message! " + message)
+    console.log("Got data! " + message)
+
+    //here you will get all the messages for rendering
+    //TODO
 })
