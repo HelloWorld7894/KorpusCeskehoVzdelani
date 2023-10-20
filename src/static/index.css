@@ -1,7 +1,88 @@
 body{
-    background-color: black;
+    background-color: #2D1E2F;
 }
 
 p{
-    color: white;
+    color: #F4D8CD;
+}
+
+#regions_div {
+    width: 978px; 
+    height: 524px; 
+}
+
+#lines_div {
+    width: 900px; 
+    height: 500px;
+}
+
+#bars_div {
+    width: 900px; 
+    height: 500px;
+}
+
+.data_button {
+    border-radius: 20px;
+    border: 3px solid #F4D8CD;
+    background: #503653;
+    color: #F4D8CD;
+    text-align: center;
+    font-family: Inconsolata;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    padding: 5;
+    transition-duration: 0.2s;
+    padding: 10 25;
+}
+
+.data_button:hover {
+    background: #4A20E4;
+    cursor: pointer;
+}
+
+.data_button.selected{
+    background: #4A20E4;
+}
+
+#data_options {
+    padding-bottom: 5;
+    gap: 10px;
+    display: flex;
+}
+
+.dropdown {
+    flex: 1;
+    border-radius: 20px;
+    border: 3px solid #F4D8CD;
+    background: #503653;
+    color: #F4D8CD;
+    text-align: center;
+    font-family: Inconsolata;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    padding: 5;
+    padding: 10 25;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='Moccasin' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 98%;
+    background-position-y: 50%;
+}
+
+.dropdown > option {
+    background: #503653;
+    color: #F4D8CD;
+    font-family: Inconsolata;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    text-align: left;
 }
