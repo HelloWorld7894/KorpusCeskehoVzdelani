@@ -2,6 +2,7 @@ secret_config.yaml
 /src/__pycache__
 /src/scraper_files/*
 !/src/scraper_files/.gitkeep
+/data/selected/*
 
 #for testing
 /src/cache/
@@ -9,3 +10,4 @@ secret_config.yaml
 #data
 /data/*
 !/data/csu_data.zip
+!/data/selected/.gitkeep

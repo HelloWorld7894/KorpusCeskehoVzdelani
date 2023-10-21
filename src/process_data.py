@@ -4,6 +4,7 @@ import yaml
 from bs4 import BeautifulSoup
 import os
 import json
+import xmltodict
 
 #test imports
 import document_parser
@@ -43,24 +44,8 @@ def set_classification():
     prompt(START_PROMPT)
 
 def load_all_data():
-    for i, filename in enumerate(os.listdir(DATA_PATH)):
-        file_path = os.path.join(DATA_PATH, filename)
-        # checking if it is a file
-        if os.path.isfile(file_path) and ".gitignore" not in file_path:
-            
-            out_array = []
-            # Creating own dataset
-            # | label: 
-            # | array: 
-        
-            with open(file_path, 'r') as f:
-                file_data = f.read()
-
-                Bs_data = BeautifulSoup(file_data, "xml")
-
-                data_div = Bs_data.find("data")
-                data = data_div.find_all("udaj")
-                print(len(data))
+    with open("../data/") as xml_file:
+        data_dict = xmltodict.parse(xml_file.read())
 
 def load_predefined_chatgpt_data():
     #load GLP
