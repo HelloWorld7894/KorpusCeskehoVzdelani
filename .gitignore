@@ -8,4 +8,4 @@ secret_config.yaml
 
 #data
 /data/*
-!/data/scrape_data.py
+!/data/csu_data.zip
