@@ -57,7 +57,7 @@
                             <option value="GLP">Gymnázium Luďka Pika (GLP)</option>
                             <option value="MG">Masarykovo gymnázium Plzeň</option>
                         </select>
-                        <button class="button" onclick="get_data(0)">Ask</button>
+                        <button class="button" onclick="get_data(1)">Ask</button>
                     </div>
                     <div id="lines_div"></div>
                 </div>
@@ -73,7 +73,7 @@
             google.charts.setOnLoadCallback(drawLineChart);
             google.charts.setOnLoadCallback(drawBarChart);
 
-            update();
+            update("GLP");
 
             function drawGeoChart() {
                 var data = google.visualization.arrayToDataTable([
@@ -273,14 +273,27 @@
                 }
             });
 
-            function update() {
+            function update(school_name) {
                 $('#gpt_text').text("123465")
-                fetch('../chatgpt_cache/GLP.json')
+                fetch(`../chatgpt_cache/${school_name}.json`)
                 .then((response) => response.json())
                 .then((json) => {
                     drawLineChart(json.years)
                     drawGeoChart()
                 })
+            }
+
+            function get_data(idx){
+                var schools = document.getElementsByClassName("dropdown searchbar")
+
+                if (schools[idx].value == "Vyberte z následujících"){
+                    alert("nevybrali jste žádnou školu")
+                    return;
+                }
+                else{
+                    //somebody chose something
+                    update(schools[idx].value)
+                }
             }
         </script>
     </body>
