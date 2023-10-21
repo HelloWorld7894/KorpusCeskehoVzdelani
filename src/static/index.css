@@ -7,9 +7,8 @@ p{
 }
 
 #regions_div {
-    width: 978px; 
+    width: 900px; 
     height: 524px;
-    padding-left: 104px; 
 }
 
 #lines_div {
@@ -21,6 +20,7 @@ p{
 #bars_div {
     width: 725px; 
     height: 524px;
+    padding-left: 40;
 }
 
 #gpt_div {
@@ -115,4 +115,22 @@ p{
 .searchbar {
     width: 448;
     text-align: left;
+}
+
+#gradient_bar {
+    width: 66px;
+    height: 603px;
+    border: 3px solid var(--White, #F4D8CD);
+    background: linear-gradient(180deg, #F5295C 0%, #F4D8CD 100%);
+    padding-top: 2;
+}
+
+.gradient_text {
+    color: #F4D8CD;
+    text-align: center;
+    font-family: Inconsolata;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
 }

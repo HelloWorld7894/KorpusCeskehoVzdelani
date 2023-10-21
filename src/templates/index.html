@@ -9,26 +9,38 @@
         <script src="../static/index.js"></script> 
     </head>
     <body>
-        <div id="data_options">
-            <button class="button data_button">Obecné</button>
-            <button class="button data_button">Mateřské</button>
-            <button class="button data_button">Základní</button>
-            <button class="button data_button">Střední</button>
-            <button class="button data_button">Vysoké</button>
-            <select class="dropdown" oninput="onDropdownInput()">
-                <option disabled selected>Vyberte z následujících</option>
-                <option value="a">a</option>
-                <option value="b">b</option>
-                <option value="c">c</option>
-                <option value="d">d</option>
-                <option value="e">e</option>
-                <option value="f">f</option>
-            </select>
-        </div>
-        <div style="display: flex; justify-content: space-between; padding: 25 20 10 20;">
-            <div id="regions_div"></div>
-            <div id="bars_div"></div>
-        </div>
+        <div style="display: flex; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column; justify-content: space-between; max-height: 600px; padding-right: 60; padding-left: 30;">
+                <p class="gradient_text" style="position: absolute; top: 0;">100</p>
+                <p class="gradient_text" style="position: absolute; top: 280;">50</p>
+                <p class="gradient_text" style="position: absolute; top: 560;">0</p>
+            </div>
+            <div id="gradient_bar"></div>
+            <div style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div id="data_options">
+                    <button class="button data_button">Obecné</button>
+                    <button class="button data_button">Mateřské</button>
+                    <button class="button data_button">Základní</button>
+                    <button class="button data_button">Střední</button>
+                    <button class="button data_button">Vysoké</button>
+                    <select class="dropdown" oninput="onDropdownInput()">
+                        <option disabled selected>Vyberte z následujících</option>
+                        <option value="a">a</option>
+                        <option value="b">b</option>
+                        <option value="c">c</option>
+                        <option value="d">d</option>
+                        <option value="e">e</option>
+                        <option value="f">f</option>
+                    </select>
+                </div>
+                        
+                <div style="display: flex; justify-content: space-between; padding: 25 20 10 20;">           
+                    <div id="regions_div"></div>
+                    <div id="bars_div"></div>
+                </div>
+            </div>
+        </div> 
+
         <div style="display: flex; justify-content: space-between; padding: 25 20 10 20;">
             <div>
                 <div style="display: flex; flex-direction: column; justify-content: space-between;">
@@ -94,7 +106,8 @@
                     backgroundColor: "red",
                     colorAxis: {minValue: 0,  colors: ['#F4D8CD', '#F5295C']},
                     legend: "none",
-                    keepAspectRatio: false
+                    keepAspectRatio: false,
+                    datalessRegionColor: "#503653",
                 };
 
                 var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
@@ -111,8 +124,16 @@
                 ]);
 
                 var options = {
-                title: 'Company Performance',
-                legend: { position: 'bottom' }
+                    title: 'Company Performance',
+                    legend: { position: 'bottom' },
+                    backgroundColor: {
+                        fill: "#503653"
+          },
+          animation: {
+              easing: "out",
+            duration: 1000,
+            startup: true
+          },
                 };
 
                 var chart = new google.visualization.LineChart(document.getElementById('lines_div'));
