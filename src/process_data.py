@@ -10,8 +10,12 @@ import document_parser
 #setup
 API_KEY = ""
 DATA_PATH = "./data/"
-START_PROMPT = """
+START_PROMPT_old = """
 Mohl by jsi fungovat jako model co bude hodnotit školu ve škále od 0 do 10 podle textu co ti zde zadám? Zpráva vždy bude začínat slovem analyzuj. Přičemž odpověď musí za každých okolností vždy být pouze to číslo
+"""
+
+START_PROMPT = """
+    pojďme si zahrát hru, vždycky, když ti já napíšu zprávu "analyzuj:" + nějaká zpráva podle které musíš ohodnotit jak se řídí škola a následně ohodnocení vypsat do škály od 0 do 10. Přičemž tady musíš vypsat jen číslo, žádný text
 """
 
 with open("secret_config.yaml", "r") as stream:

@@ -1,0 +1,31 @@
+{
+    "years": [
+        {
+            "label": "2017",
+            "mark": 6.5
+        },
+        {
+            "label": "2014",
+            "mark": 7.25
+        },
+        {
+            "label": "2009",
+            "mark": 8.29
+        },
+        {
+            "label": "2007",
+            "mark": 8.5
+        },
+        {
+            "label": "2002",
+            "mark": 6
+        }
+    ],
+    "improvement": [
+        "Opatřit, aby výuka tělesné výchovy byla bezplatná pro všechny žáky, v souladu s principem bezplatného vzdělávání.",
+        "Pravidelně aktualizovat ŠVP na základě změn v příslušných rámcových vzdělávacích programech.",
+        "Dále sledovat účinnost vzdělávání, včetně úspěšnosti žáků, a pravidelně vyhodnocovat výsledky.",
+        "Podporovat a udržovat vysoký standard vzdělávání a pestrou nabídku volitelných předmětů.",
+        "Udržovat kontinuitu a zajišťovat, aby změna vedení školy neovlivnila kvalitu poskytovaného vzdělání."
+    ]
+}

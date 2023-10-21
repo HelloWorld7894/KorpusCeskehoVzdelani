@@ -25,16 +25,16 @@ def parse_docs():
             if pdf_idx == "0" or pdf_idx == "1":
 
                 #parse txt to get rid of useless parts
-                idx = full_txt.find("Charakteristika")
+                idx = full_txt.find("Závěry")
                 top_parse = full_txt[idx:]
 
-                idx = top_parse.find("Poučení")
+                idx = top_parse.find("Seznam dokladů")
                 bot_parse = top_parse[:idx]
 
             elif pdf_idx == "2":
 
                 #parse txt to get rid of useless parts
-                idx = full_txt.find("školy")
+                idx = full_txt.find("Celkové hodnocení školy")
                 top_parse = full_txt[idx:]
 
                 idx = top_parse.find("Seznam písemností,")
@@ -43,29 +43,24 @@ def parse_docs():
             elif pdf_idx == "3":
 
                 #parse txt to get rid of useless parts
-                idx = full_txt.find("Zjišťování a hodnocení formálních")
+                idx = full_txt.find("ZÁVĚR")
                 top_parse = full_txt[idx:]
 
-                idx = top_parse.find("Složení inspekčního týmu a datum vyhotovení inspekční zprávy")
+                idx = top_parse.find("Razítko")
                 bot_parse = top_parse[:idx]
             
             elif pdf_idx == "4":
 
                 #parse txt to get rid of useless parts
-                idx = full_txt.find("Signatura")
+                idx = full_txt.find("ZÁVĚR")
                 top_parse = full_txt[idx:]
 
-                idx = top_parse.find("Složení inspekčního týmu a datum vyhotovení inspekční zprávy")
+                idx = top_parse.find("Razítko")
                 bot_parse = top_parse[:idx]
 
             text_obj["label"] = file_path.replace("./src/cache/", "").replace(".pdf", "")[:-2]
             text_obj["text"] = bot_parse
             
-            #charlen = len(text_obj["text"])
-            #if charlen > 13000: #this is hardcoded
-            #    text_obj["text"] = bot_parse[int(3 * (charlen / 4)):]
-
-
             all_text.append(text_obj)
 
     return all_text
