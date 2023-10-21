@@ -1,4 +1,27 @@
-# SusiceHack
+# Korpus Českého Vzdělání
+
+## Program
+Tahle webová stránka slouží jako shrnutí českého školství pomocí mapy české republiky rozdělené na kraje.
+**Funkce:**
+- Porovnávání ukazatelů mezi kraji
+- Hodnocení školy pomocí ChatGPT
+
+***Odkaz na webovou aplikaci:*** http://tomeng.rf.gd/SusiceHack/templates/
+
+**Jak program funguje:**
+1. Stáhne aktuální datové sady pro porovnávání krajů
+2. Podle uživatelského vstupu se vyhledá příslušná škola k vyhodnocení ChatGPT (bodové rozhraní je od 0 do 10)
+3. Vyhodnotí do 5 záznamů z ČSI (české školní inspekce)
+4. Poslání vyhodnocených dat na web
+
+
+**z jakých datových zdrojů jsme čerpali:**
+
+* **Registr inspekčních zpráv ČSI** (https://www.csicr.cz/cz/Registr-inspekcnich-zprav) - zprávy české školní inspekce ze všech škol
+
+* **Vzdělávání ČSU** (https://www.czso.cz/csu/czso/1-vzdelavani) - počet studentů ve vzdělávání podle věku, pohlaví a tříd
+    * Data: [ČSÚ VDB](https://vdb.czso.cz/vdbvo2/faces/index.jsf?page=statistiky&filtr=G~F_M~F_Z~F_R~F_P~_S~_null_null_&katalog=30848)
+
 ## Datové sady a jejich anotace
 
 ***Školství***
