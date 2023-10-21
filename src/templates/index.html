@@ -1,9 +1,9 @@
-<html class="theme-dark">
+<html class="theme-light">
     <head>
         <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://www.gstatic.com/charts/loader.js"></script>
-        <script src="https://unpkg.com/xml-js@1.6.11/"></script>
+        <script src="https://unpkg.com/xml-js@1.6.11"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
 
         <link rel="stylesheet" href="../static/index.css">
@@ -26,14 +26,13 @@
                     <button class="button data_button">Vysoké</button>
                     <select class="dropdown" oninput="onDropdownInput()">
                         <option disabled selected>Vyberte z následujících</option>
-                        <option value="a">a</option>
-                        <option value="b">b</option>
-                        <option value="c">c</option>
-                        <option value="d">d</option>
-                        <option value="e">e</option>
-                        <option value="f">f</option>
+                        <option value="a">Přijatí</option>
+                        <option value="b">Hustota</option>
+                        <option value="c">Poměr dětí na školku</option>
+                        <option value="d">Absolventi</option>
+                        <option value="e">Kvalifikace učitelů</option>
                     </select>
-                    <button class="button" onclick="toggleTheme()">☽</button>
+                    <button id="theme-toggler" class="button" onclick="toggleTheme()">🌑</button>
                 </div>
                         
                 <div style="display: flex; justify-content: space-between; padding: 25 20 10 20;">           
@@ -64,7 +63,7 @@
                 </div>
             </div>
             <div id="gpt_div">
-                <p id="gpt_text">asdkjsadlhk</p>
+                <p id="gpt_text">...</p>
             </div>
         </div>
 
@@ -78,31 +77,31 @@
 
             function drawGeoChart() {
                 var data = google.visualization.arrayToDataTable([
-                    ['Country', 'Popularity'],
-                    ['Praha', Math.random()],
-                    ['Středočeský kraj', Math.random()],
-                    ['Jihočeský kraj', Math.random()],
-                    ['Plzeňský kraj', Math.random()],
-                    ['Karlovarský kraj', Math.random()],
-                    ['Ústecký kraj', Math.random()],
-                    ['Liberecký kraj', Math.random()],
-                    ['Královéhradecký kraj', Math.random()],
-                    ['Pardubický kraj', Math.random()],
-                    ['Vysočina', Math.random()],
-                    ['Jihomoravský kraj', Math.random()],
-                    ['Zlínský kraj', Math.random()],
-                    ['Olomoucký kraj', Math.random()],
-                    ['Moravskoslezský kraj', Math.random()],
+                    ['Country', 'Hodnoceni'],
+                    ['Praha', 0.52],
+                    ['Středočeský kraj', 0.41],
+                    ['Jihočeský kraj', 0.22],
+                    ['Plzeňský kraj', 0.9],
+                    ['Karlovarský kraj', 0.35],
+                    ['Ústecký kraj', 0.17],
+                    ['Liberecký kraj', 0.69],
+                    ['Královéhradecký kraj', 0.78],
+                    ['Pardubický kraj', 0.46],
+                    ['Vysočina', 0.82],
+                    ['Jihomoravský kraj', 0.33],
+                    ['Zlínský kraj', 0.46],
+                    ['Olomoucký kraj', 0.12],
+                    ['Moravskoslezský kraj', 0.63],
 
                 ]);
 
                 var options = {
                     region: "CZ",
                     resolution: "provinces",
-                    colorAxis: {minValue: 0,  colors: ['#F4D8CD', '#F5295C']},
+                    colorAxis: {minValue: 0,  colors: ['#F4D8CD', varx("--color-primary")]},
                     legend: "none",
                     keepAspectRatio: false,
-                    datalessRegionColor: varx('--color-tile')
+                    datalessRegionColor : varx("--color-tile")
                 };
 
                 var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
@@ -130,30 +129,30 @@
                     hAxis: {
                         title: 'Rok',
                         titleTextStyle: {
-                            color: "F4D8CD"
+                            color: varx("--color-text")
                             },
                         logScale: true,
                             gridlines: {
-                            color: "F4D8CD"
+                            color: varx("--color-text")
                             },
                             textStyle: {
-                            color: "F4D8CD"
+                            color: varx("--color-text")
                         },
                         },
                     vAxis: {
                     title: 'Hodnocení',
                     titleTextStyle: {
-                    color: "F4D8CD"
+                    color: varx("--color-text")
                     },
                     logScale: false,
                         gridlines: {
-                        color: "F4D8CD"
+                        color: varx("--color-text")
                         },
                     },
 
-                    colors: ['4A20E4', 'F5295C'],
+                    colors: [varx("--color-primary"), varx("--color-secondary")],
                     backgroundColor: {
-                        fill: "#503653"
+                        fill: varx("--color-tile")
                     },
                     animation: {
                         easing: "out",
@@ -169,20 +168,20 @@
             }
             function drawBarChart() {
                 var data = new google.visualization.DataTable();
-                data.addColumn('timeofday', 'Time of Day');
-                data.addColumn('number', 'Motivation Level');
+                data.addColumn('number', 'Rok');
+                data.addColumn('number', 'Počet žáků');
 
                 data.addRows([
-                    [{v: [8, 0, 0], f: '8 am'}, 1],
-                    [{v: [9, 0, 0], f: '9 am'}, 2],
-                    [{v: [10, 0, 0], f:'10 am'}, 3],
-                    [{v: [11, 0, 0], f: '11 am'}, 4],
-                    [{v: [12, 0, 0], f: '12 pm'}, 10],
-                    [{v: [13, 0, 0], f: '1 pm'}, 6],
-                    [{v: [14, 0, 0], f: '2 pm'}, 7],
-                    [{v: [15, 0, 0], f: '3 pm'}, 8],
-                    [{v: [16, 0, 0], f: '4 pm'}, 9],
-                    [{v: [17, 0, 0], f: '5 pm'}, 10],
+                    [2011, 1],
+                    [2012, 2],
+                    [2013, 3],
+                    [2014, 4],
+                    [2015, 5],
+                    [2016, 6],
+                    [2017, 7],
+                    [2018, 8],
+                    [2019, 9],
+                    [2020, 10],
                 ]);
 
                 var options = {
@@ -191,7 +190,7 @@
                     alwaysOutside: true,
                     textStyle: {
                         fontSize: 14,
-                        color: "F4D8CD",
+                        color: varx("--color-text"),
                         auraColor: 'none'
                     }
                     },
@@ -199,27 +198,27 @@
                     gridlines: {
                         color: "transparent"
                     },
-                        title: 'Time of Day',
-                        format: 'h:mm a',
+                        title: 'Rok',
                         viewWindow: {
                             min: [7, 30, 0],
                             max: [17, 30, 0]
                         },
                         titleTextStyle: {
-                            color: "F4D8CD",
+                            color: varx("--color-text"),
                             fontSize: 12
                         },
                         textStyle: {
-                            color: "F4D8CD"
-                        }
+                            color: varx("--color-text")
+                        },
+                        format: ""
                     },
                     vAxis: {
-                    title: 'Rating (scale of 1-10)',
+                    title: 'Počet žáků',
                     gridlines: {
                         color: "transparent"
                     },
                     titleTextStyle: {
-                        color: "F4D8CD",
+                        color: varx("--color-text"),
                         fontSize: 12
                     }
                     },
@@ -229,7 +228,7 @@
                     startup: true
                     },
                     backgroundColor: {
-                    fill: "#503653"
+                    fill: varx("--color-tile")
                     }
                 };
 
@@ -248,15 +247,17 @@
             function setTheme(themeName) {
                 localStorage.setItem('theme', themeName);
                 document.documentElement.className = themeName;
-                console.log(themeName)
             }
 
             function toggleTheme() {
                 if (localStorage.getItem('theme') === 'theme-dark') {
                     setTheme('theme-light');
+                    $("#theme-toggler").text("🌑")
                 } else {
                     setTheme('theme-dark');
+                    $("#theme-toggler").text("☀️")
                 }
+                get_data(0)
             }
 
             function varx(property) {
@@ -290,6 +291,7 @@
                      json2 = json 
                      drawLineChart(json1.years.reverse(), json2.years.reverse())
                     drawGeoChart()
+                    drawBarChart()
                     if(idx == 0) {
                     $('#gpt_text').text(json1.improvement)
                 } else {
