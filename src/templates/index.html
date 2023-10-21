@@ -81,7 +81,9 @@
             google.charts.setOnLoadCallback(drawLineChart);
             google.charts.setOnLoadCallback(drawBarChart);
 
-            function drawGeoChart() {
+            update();
+
+            function drawGeoChart(inData) {
                 var data = google.visualization.arrayToDataTable([
                     ['Country', 'Popularity'],
                     ['Praha', Math.random()],
@@ -107,21 +109,30 @@
                     colorAxis: {minValue: 0,  colors: ['#F4D8CD', '#F5295C']},
                     legend: "none",
                     keepAspectRatio: false,
-                    datalessRegionColor: "--color-tile",
+                    datalessRegionColor: getComputedStyle(document.documentElement)
+    .getPropertyValue('--color-bg'),
                 };
 
                 var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
                 chart.draw(data, options);
             }
-            function drawLineChart() {
-                var data = google.visualization.arrayToDataTable([
+            function drawLineChart(inData) {
+                /*var data = google.visualization.arrayToDataTable([
                 ['Year', 'Sales', 'Expenses'],
                 ['2004',  1000,      400],
                 ['2005',  1170,      460],
                 ['2006',  660,       1120],
                 ['2007',  1030,      540]
-                ]);
+                ]);*/
+                var data = new google.visualization.DataTable();
+                data.addColumn('number', 'Year')
+                data.addColumn('number', 'Mark1')
+                data.addColumn('number', 'Mark1')
+
+                inData.array.forEach(element => {
+                    data.addRow(element.label, element.mark, 0)
+                });
 
                 var options = {
                     hAxis: {
@@ -263,7 +274,17 @@
                 } else {
                     setTheme('theme-light');
                 }
-            })();
+            });
+
+            function update() {
+                $('#gpt_text').text("123465")
+                fetch('../chatgpt_cache/GLP.json')
+                .then((response) => response.json())
+                .then((json) => {drawLineChart(
+                    json.years)
+                    console.log(json)
+                })
+            }
         </script>
     </body>
 </html>
