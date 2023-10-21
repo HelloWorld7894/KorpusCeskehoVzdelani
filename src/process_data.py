@@ -4,6 +4,7 @@ import yaml
 from bs4 import BeautifulSoup
 import os
 import json
+import xmltodict
 
 #test imports
 import document_parser
@@ -18,6 +19,7 @@ Mohl by jsi fungovat jako model co bude hodnotit školu ve škále od 0 do 10 po
 START_PROMPT = """
     pojďme si zahrát hru, vždycky, když ti já napíšu zprávu "analyzuj:" + nějaká zpráva podle které musíš ohodnotit jak se řídí škola a následně ohodnocení vypsat do škály od 0 do 10. Přičemž tady musíš vypsat jen číslo, žádný text
 """
+MAX_COLS = 7
 
 with open("secret_config.yaml", "r") as stream:
     try:
@@ -43,37 +45,59 @@ def set_classification():
     prompt(START_PROMPT)
 
 def load_all_data():
-    for i, filename in enumerate(os.listdir(DATA_PATH)):
-        file_path = os.path.join(DATA_PATH, filename)
-        # checking if it is a file
-        if os.path.isfile(file_path) and ".gitignore" not in file_path:
+    with open("./data/selected/GymnaziaAll.xml") as xml_file:
+        data_dict = xmltodict.parse(xml_file.read())
+
+
+
+        json_data = data_dict["vdbData"]["data"]["udaj"]
+
+        slices = []
+
+        for i, value in enumerate(json_data):
+            slice = {
+                "schools": 0,
+                "classes": 0,
+                "students-all": 0,
+                "students-women": 0,
+                "students-men": 0,
+                "1rocnik": 0,
+                "absolventi": 0
+            }
             
-            out_array = []
-            # Creating own dataset
-            # | label: 
-            # | array: 
-        
-            with open(file_path, 'r') as f:
-                file_data = f.read()
+            try:
+                if i % 7 == 0:
+                    slice["schools"] = value["hod"]
+                elif i % 7 == 1:
+                    slice["classes"] = value["hod"]
+                elif i % 7 == 2:
+                    slice["students-all"] = value["hod"]
+                elif i % 7 == 3:
+                    slice["students-women"] = value["hod"]
+                elif i % 7 == 4:
+                    slice["students-men"] = value["hod"]
+                elif i % 7 == 5:
+                    slice["1rocnik"] = value["hod"]
+                elif i % 7 == 6:
+                    slice["absolventi"] = value["hod"]
+            except(KeyError):
+                if i % 7 == 0:
+                    slice["schools"] = 0
+                elif i % 7 == 1:
+                    slice["classes"] = 0
+                elif i % 7 == 2:
+                    slice["students-all"] = 0
+                elif i % 7 == 3:
+                    slice["students-women"] = 0
+                elif i % 7 == 4:
+                    slice["students-men"] = 0
+                elif i % 7 == 5:
+                    slice["1rocnik"] = 0
+                elif i % 7 == 6:
+                    slice["absolventi"] = 0
 
-                Bs_data = BeautifulSoup(file_data, "xml")
-
-                data_div = Bs_data.find("data")
-                data = data_div.find_all("udaj")
-                print(len(data))
-
-                out = []
-                for iy in range(int(len(data) / 4)): #4 columns
-                    row = []
-
-                    for ix in range(4):
-                        value = data[iy * ix].find("hod").text
-
-                        row.append(value)
-
-                    out.append(row)
-
-                print(out)
+            slices.append(slice)
+        print(slices)
 
 def load_predefined_chatgpt_data():
     #load GLP
@@ -88,4 +112,5 @@ def load_predefined_chatgpt_data():
     return [string_GLP, string_MG]
 
 if __name__ == "__main__":
-    load_predefined_chatgpt_data()
+    #load_predefined_chatgpt_data()
+    load_all_data()
