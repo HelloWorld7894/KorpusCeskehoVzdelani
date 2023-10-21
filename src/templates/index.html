@@ -117,12 +117,12 @@
                 ['2007',  1030,      540]
                 ]);*/
                 var data = new google.visualization.DataTable();
-                data.addColumn('number', 'Year')
+                data.addColumn('string', 'Year')
                 data.addColumn('number', 'Mark1')
                 data.addColumn('number', 'Mark1')
 
-                inData.array.forEach(element => {
-                    data.addRow(element.label, element.mark, 0)
+                inData.forEach(element => {
+                    data.addRow([element.label, element.mark, 0])
                 });
 
                 var options = {
