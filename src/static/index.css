@@ -1,9 +1,28 @@
+.theme-dark {
+    --color-primary: #F5295C;
+    --color-secondary: #4A20E4;
+    --color-accent: #EDB183;
+    --color-text: #F4D8CD;
+    --color-bg: #2D1E2F;
+    --color-tile: #503653;
+ }.theme-light {
+    --color-primary: #BAE420;
+    --color-secondary: #4A20E4;
+    --color-accent: #EDB183;
+    --color-text: #2D1E2F;
+    --color-bg: #F4D8CD;
+    --color-tile: #EDB183;
+ }
+
+
+
+
 body{
-    background-color: #2D1E2F;
+    background-color: var(--color-bg);
 }
 
 p{
-    color: #F4D8CD;
+    color: var(--color-text);
 }
 
 #regions_div {
@@ -27,14 +46,14 @@ p{
     min-width: 725px;
     max-width: 725px;
     min-height: 408;
-    background: #503653;
+    background: var(--color-tile);
 }
 
 .button {
     border-radius: 20px;
-    border: 3px solid #F4D8CD;
-    background: #503653;
-    color: #F4D8CD;
+    border: 3px solid var(--color-text);
+    background: var(--color-tile);
+    color: var(--color-text);
     text-align: center;
     font-family: Inconsolata;
     font-size: 24px;
@@ -47,12 +66,12 @@ p{
 }
 
 .button:hover {
-    background: #4A20E4;
+    background: var(--color-secondary);
     cursor: pointer;
 }
 
 .button.selected{
-    background: #4A20E4;
+    background: var(--color-secondary);
 }
 
 #data_options {
@@ -64,9 +83,9 @@ p{
 .dropdown {
     flex: 1;
     border-radius: 20px;
-    border: 3px solid #F4D8CD;
-    background: #503653;
-    color: #F4D8CD;
+    border: 3px solid var(--color-text);
+    background: var(--color-tile);
+    color: var(--color-text);
     text-align: center;
     font-family: Inconsolata;
     font-size: 24px;
@@ -85,20 +104,9 @@ p{
     background-position-y: 50%;
 }
 
-.dropdown > option {
-    background: #503653;
-    color: #F4D8CD;
-    font-family: Inconsolata;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 900;
-    line-height: normal;
-    text-align: left;
-}
-
 #gpt_text {
     padding: 0 20 15 10;
-    color: #F4D8CD;
+    color: var(--color-text);
     font-family: Inconsolata;
     font-size: 24px;
     font-style: normal;
@@ -120,13 +128,13 @@ p{
 #gradient_bar {
     width: 66px;
     height: 603px;
-    border: 3px solid var(--White, #F4D8CD);
-    background: linear-gradient(180deg, #F5295C 0%, #F4D8CD 100%);
+    border: 3px solid var(--color-text);
+    background: linear-gradient(180deg, var(--color-primary) 0%, #F4D8CD 100%);
     padding-top: 2;
 }
 
 .gradient_text {
-    color: #F4D8CD;
+    color: var(--color-text);
     text-align: center;
     font-family: Inconsolata;
     font-size: 24px;
