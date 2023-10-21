@@ -31,9 +31,7 @@ def main():
 def handle_connection(data):
     print("Got a connection! " + data)
 
-    #only GLP and MG here
-    gym_data = process_data.load_predefined_chatgpt_data()
-    
+    #ChatGPT data will be loaded in frontend automatically
 
     #load data
     socketio.emit("data", "data_test")
