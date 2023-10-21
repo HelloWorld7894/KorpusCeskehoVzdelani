@@ -22,12 +22,13 @@ def handle_connection(data):
 
     web_input = "Církevní gymnázium Plzeň"
 
-    webscraper.search_for_schools(web_input)
+    #webscraper.search_for_schools(web_input)
     output = document_parser.parse_docs()
 
     #feed to ChatGPT
     for out_obj in output:
-        out = process_data.prompt(out_obj["text"])
+        out = process_data.prompt("analyzuj: " + out_obj["text"])
+        print("MODEL OUTPUT")
         print(out)
 
     #load data
