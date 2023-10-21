@@ -12,16 +12,8 @@ socketio = SocketIO(app)
 #set classification for chatGPT
 process_data.set_classification()
 
-@app.route("/")
-def main():
-    return render_template("index.html")
-
-@socketio.on("conn_valid")
-def handle_connection(data):
-    print("Got a connection! " + data)
-
-    web_input = "Církevní gymnázium Plzeň"
-
+#functions
+def main_chatbot(web_input):
     #webscraper.search_for_schools(web_input)
     output = document_parser.parse_docs()
 
@@ -30,6 +22,18 @@ def handle_connection(data):
         out = process_data.prompt("analyzuj: " + out_obj["text"])
         print("MODEL OUTPUT")
         print(out)
+
+@app.route("/")
+def main():
+    return render_template("index.html")
+
+@socketio.on("conn_valid")
+def handle_connection(data):
+    print("Got a connection! " + data)
+
+    #only GLP and MG here
+    gym_data = process_data.load_predefined_chatgpt_data()
+    
 
     #load data
     socketio.emit("data", "data_test")

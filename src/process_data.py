@@ -3,6 +3,7 @@ import openai
 import yaml
 from bs4 import BeautifulSoup
 import os
+import json
 
 #test imports
 import document_parser
@@ -74,13 +75,17 @@ def load_all_data():
 
                 print(out)
 
-if __name__ == "__main__":
-    """
-    #just for testing
-    set_classification()
-    chat_in = document_parser.parse_doc()
-    response = prompt(chat_in)
+def load_predefined_chatgpt_data():
+    #load GLP
+    file_GLP = open("./src/chatgpt_cache/GLP.json")
+    json_GLP = json.load(file_GLP)
+    string_GLP = json.dumps(json_GLP, ensure_ascii=False)
 
-    print(response)
-    """
-    load_all_data()
+    file_MG = open("./src/chatgpt_cache/GLP.json")
+    json_MG = json.load(file_MG)
+    string_MG = json.dumps(json_MG, ensure_ascii=False)
+
+    return [string_GLP, string_MG]
+
+if __name__ == "__main__":
+    load_predefined_chatgpt_data()
