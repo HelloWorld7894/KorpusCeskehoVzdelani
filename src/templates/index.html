@@ -108,7 +108,7 @@
 
                 chart.draw(data, options);
             }
-            function drawLineChart(inData) {
+            function drawLineChart(inData1, inData2) {
                 /*var data = google.visualization.arrayToDataTable([
                 ['Year', 'Sales', 'Expenses'],
                 ['2004',  1000,      400],
@@ -118,16 +118,16 @@
                 ]);*/
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', 'Year')
-                data.addColumn('number', 'Mark1')
-                data.addColumn('number', 'Mark1')
+                data.addColumn('number', document.getElementsByClassName("dropdown searchbar")[0].value)
+                data.addColumn('number', document.getElementsByClassName("dropdown searchbar")[1].value)
 
-                inData.forEach(element => {
-                    data.addRow([element.label, element.mark])
-                });
+                for (let i = 0; i < inData1.length; i++) {
+                    data.addRow([inData1[i].label, inData1[i].mark, inData2[i].mark])
+                }
 
                 var options = {
                     hAxis: {
-                        title: 'Time',
+                        title: 'Rok',
                         titleTextStyle: {
                             color: "F4D8CD"
                             },
@@ -140,7 +140,7 @@
                         },
                         },
                     vAxis: {
-                    title: 'Popularity',
+                    title: 'Hodnocení',
                     titleTextStyle: {
                     color: "F4D8CD"
                     },
@@ -272,13 +272,22 @@
                 }
             });
 
-            function update(school_name) {
+            function update(school1, school2) {
+                console.log(`${school1} | ${school2}`)
                 $('#gpt_text').text("123465")
-                fetch(`../static/chatgpt_cache/${school_name}.json`)
+                json1 = undefined
+                json2 = undefined
+                fetch(`../static/chatgpt_cache/${school1}.json`)
                 .then((response) => response.json())
                 .then((json) => {
-                    drawLineChart(json.years)
+                     json1 = json 
+                     fetch(`../static/chatgpt_cache/${school2}.json`)
+                    .then((response) => response.json())
+                    .then((json) => {
+                     json2 = json 
+                     drawLineChart(json1.years.reverse(), json2.years.reverse())
                     drawGeoChart()
+                    })
                 })
             }
 
@@ -291,7 +300,7 @@
                 }
                 else{
                     //somebody chose something
-                    update(schools[idx].value)
+                    update(schools[0].value, schools[1].value,)
                 }
             }
         </script>

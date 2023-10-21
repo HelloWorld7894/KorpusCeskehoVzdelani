@@ -14,6 +14,15 @@
     --color-tile: #EDB183;
  }
 
+ #lines_div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > svg:nth-child(1) > g:nth-child(3) > g:nth-child(2) > g:nth-child(2) > text:nth-child(1) {
+    color: var(--color-text);
+    fill: var(--color-text);
+ }
+
+ #lines_div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > svg:nth-child(1) > g:nth-child(3) > g:nth-child(3) > g:nth-child(2) > text:nth-child(1) {
+    color: var(--color-text);
+    fill: var(--color-text);
+ }
 
 body{
     background-color: var(--color-bg);
