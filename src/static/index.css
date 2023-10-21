@@ -8,20 +8,29 @@ p{
 
 #regions_div {
     width: 978px; 
-    height: 524px; 
+    height: 524px;
+    padding-left: 104px; 
 }
 
 #lines_div {
-    width: 900px; 
-    height: 500px;
+    width: 1080px; 
+    height: 320px;
+    padding-top: 14;
 }
 
 #bars_div {
-    width: 900px; 
-    height: 500px;
+    width: 725px; 
+    height: 524px;
 }
 
-.data_button {
+#gpt_div {
+    min-width: 725px;
+    max-width: 725px;
+    min-height: 408;
+    background: #503653;
+}
+
+.button {
     border-radius: 20px;
     border: 3px solid #F4D8CD;
     background: #503653;
@@ -34,20 +43,20 @@ p{
     line-height: normal;
     padding: 5;
     transition-duration: 0.2s;
-    padding: 10 25;
+    padding: 10 20;
 }
 
-.data_button:hover {
+.button:hover {
     background: #4A20E4;
     cursor: pointer;
 }
 
-.data_button.selected{
+.button.selected{
     background: #4A20E4;
 }
 
 #data_options {
-    padding-bottom: 5;
+    padding: 5 25;
     gap: 10px;
     display: flex;
 }
@@ -65,7 +74,7 @@ p{
     font-weight: 900;
     line-height: normal;
     padding: 5;
-    padding: 10 25;
+    padding: 10 20;
 
     appearance: none;
     -webkit-appearance: none;
@@ -84,5 +93,26 @@ p{
     font-style: normal;
     font-weight: 900;
     line-height: normal;
+    text-align: left;
+}
+
+#gpt_text {
+    padding: 0 20 15 10;
+    color: #F4D8CD;
+    font-family: Inconsolata;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    text-align: left;
+}
+
+#search_div {
+    max-width: 1080;
+    height: 74;
+}
+
+.searchbar {
+    width: 448;
     text-align: left;
 }

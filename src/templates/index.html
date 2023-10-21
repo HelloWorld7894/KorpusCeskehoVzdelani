@@ -10,11 +10,11 @@
     </head>
     <body>
         <div id="data_options">
-            <button class="data_button">Obecné</button>
-            <button class="data_button">Mateřské</button>
-            <button class="data_button">Základní</button>
-            <button class="data_button">Střední</button>
-            <button class="data_button">Vysoké</button>
+            <button class="button data_button">Obecné</button>
+            <button class="button data_button">Mateřské</button>
+            <button class="button data_button">Základní</button>
+            <button class="button data_button">Střední</button>
+            <button class="button data_button">Vysoké</button>
             <select class="dropdown" oninput="onDropdownInput()">
                 <option disabled selected>Vyberte z následujících</option>
                 <option value="a">a</option>
@@ -25,9 +25,42 @@
                 <option value="f">f</option>
             </select>
         </div>
-        <div id="regions_div"></div>
-        <div id="lines_div"></div>
-        <div id="bars_div"></div>
+        <div style="display: flex; justify-content: space-between; padding: 25 20 10 20;">
+            <div id="regions_div"></div>
+            <div id="bars_div"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 25 20 10 20;">
+            <div>
+                <div style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div id="search_div">
+                        <select class="dropdown searchbar">
+                            <option disabled selected>Vyberte z následujících</option>
+                            <option value="a">a</option>
+                            <option value="b">b</option>
+                            <option value="c">c</option>
+                            <option value="d">d</option>
+                            <option value="e">e</option>
+                            <option value="f">f</option>
+                        </select>
+                        <button class="button">Ask</button>
+                        <select class="dropdown searchbar">
+                            <option disabled selected>Vyberte z následujících</option>
+                            <option value="a">a</option>
+                            <option value="b">b</option>
+                            <option value="c">c</option>
+                            <option value="d">d</option>
+                            <option value="e">e</option>
+                            <option value="f">f</option>
+                        </select>
+                        <button class="button">Ask</button>
+                    </div>
+                    <div id="lines_div"></div>
+                </div>
+            </div>
+            <div id="gpt_div">
+                <p id="gpt_text">asdkjsadlhk</p>
+            </div>
+        </div>
 
         <script>
             google.charts.load('current', {'packages':['geochart', 'corechart', 'bar'],});
@@ -105,17 +138,47 @@
                 ]);
 
                 var options = {
-                    title: 'Motivation Level Throughout the Day',
+                    title: '',
+                    annotations: {
+                    alwaysOutside: true,
+                    textStyle: {
+                        fontSize: 14,
+                        color: "F4D8CD",
+                        auraColor: 'none'
+                    }
+                    },
                     hAxis: {
+                    gridlines: {
+                        color: "transparent"
+                    },
                     title: 'Time of Day',
                     format: 'h:mm a',
                     viewWindow: {
                         min: [7, 30, 0],
                         max: [17, 30, 0]
+                    },
+                    titleTextStyle: {
+                        color: "F4D8CD",
+                        fontSize: 12
                     }
                     },
                     vAxis: {
-                    title: 'Rating (scale of 1-10)'
+                    title: 'Rating (scale of 1-10)',
+                    gridlines: {
+                        color: "transparent"
+                    },
+                    titleTextStyle: {
+                        color: "F4D8CD",
+                        fontSize: 12
+                    }
+                    },
+                    animation: {
+                    easing: "out",
+                    duration: 1000,
+                    startup: true
+                    },
+                    backgroundColor: {
+                    fill: "#503653"
                     }
                 };
 
