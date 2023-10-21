@@ -274,7 +274,7 @@
 
             function update(school_name) {
                 $('#gpt_text').text("123465")
-                fetch(`../chatgpt_cache/${school_name}.json`)
+                fetch(`../static/chatgpt_cache/${school_name}.json`)
                 .then((response) => response.json())
                 .then((json) => {
                     drawLineChart(json.years)

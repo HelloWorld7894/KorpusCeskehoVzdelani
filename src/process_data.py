@@ -77,11 +77,11 @@ def load_all_data():
 
 def load_predefined_chatgpt_data():
     #load GLP
-    file_GLP = open("./src/chatgpt_cache/GLP.json")
+    file_GLP = open("./chatgpt_cache/GLP.json")
     json_GLP = json.load(file_GLP)
     string_GLP = json.dumps(json_GLP, ensure_ascii=False)
 
-    file_MG = open("./src/chatgpt_cache/GLP.json")
+    file_MG = open("./chatgpt_cache/GLP.json")
     json_MG = json.load(file_MG)
     string_MG = json.dumps(json_MG, ensure_ascii=False)
 

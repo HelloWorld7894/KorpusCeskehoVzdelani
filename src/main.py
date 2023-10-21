@@ -10,7 +10,7 @@ app = Flask(__name__, template_folder='templates', static_folder='static')
 socketio = SocketIO(app)
 
 #set classification for chatGPT
-process_data.set_classification()
+#process_data.set_classification()
 
 #functions
 def main_chatbot(web_input):
