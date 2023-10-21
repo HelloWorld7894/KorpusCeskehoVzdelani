@@ -62,19 +62,6 @@ def load_all_data():
                 data = data_div.find_all("udaj")
                 print(len(data))
 
-                out = []
-                for iy in range(int(len(data) / 4)): #4 columns
-                    row = []
-
-                    for ix in range(4):
-                        value = data[iy * ix].find("hod").text
-
-                        row.append(value)
-
-                    out.append(row)
-
-                print(out)
-
 def load_predefined_chatgpt_data():
     #load GLP
     file_GLP = open("./chatgpt_cache/GLP.json")
@@ -88,4 +75,5 @@ def load_predefined_chatgpt_data():
     return [string_GLP, string_MG]
 
 if __name__ == "__main__":
-    load_predefined_chatgpt_data()
+    #load_predefined_chatgpt_data()
+    load_all_data()
