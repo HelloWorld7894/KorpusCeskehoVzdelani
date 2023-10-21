@@ -3,6 +3,7 @@
         <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="https://unpkg.com/xml-js@1.6.11/"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
 
         <link rel="stylesheet" href="../static/index.css">
@@ -108,7 +109,7 @@
 
                 chart.draw(data, options);
             }
-            function drawLineChart(inData) {
+            function drawLineChart(inData1, inData2) {
                 /*var data = google.visualization.arrayToDataTable([
                 ['Year', 'Sales', 'Expenses'],
                 ['2004',  1000,      400],
@@ -118,16 +119,16 @@
                 ]);*/
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', 'Year')
-                data.addColumn('number', 'Mark1')
-                data.addColumn('number', 'Mark1')
+                data.addColumn('number', document.getElementsByClassName("dropdown searchbar")[0].value)
+                data.addColumn('number', document.getElementsByClassName("dropdown searchbar")[1].value)
 
-                inData.forEach(element => {
-                    data.addRow([element.label, element.mark, 0])
-                });
+                for (let i = 0; i < inData1.length; i++) {
+                    data.addRow([inData1[i].label, inData1[i].mark, inData2[i].mark])
+                }
 
                 var options = {
                     hAxis: {
-                        title: 'Time',
+                        title: 'Rok',
                         titleTextStyle: {
                             color: "F4D8CD"
                             },
@@ -140,7 +141,7 @@
                         },
                         },
                     vAxis: {
-                    title: 'Popularity',
+                    title: 'Hodnocení',
                     titleTextStyle: {
                     color: "F4D8CD"
                     },
@@ -272,13 +273,29 @@
                 }
             });
 
-            function update(school_name) {
-                $('#gpt_text').text("123465")
-                fetch(`../static/chatgpt_cache/${school_name}.json`)
+            function update(school1, school2, idx) {
+                fetch(`../../data/VZD04b.xml`)
+                .then((response) => convert.xml2json(response, {compact: true, spaces: 4}).json())
+                .then((json) => console.log(json))
+
+                json1 = undefined
+                json2 = undefined
+                fetch(`../static/chatgpt_cache/${school1}.json`)
                 .then((response) => response.json())
                 .then((json) => {
-                    drawLineChart(json.years)
+                     json1 = json 
+                     fetch(`../static/chatgpt_cache/${school2}.json`)
+                    .then((response) => response.json())
+                    .then((json) => {
+                     json2 = json 
+                     drawLineChart(json1.years.reverse(), json2.years.reverse())
                     drawGeoChart()
+                    if(idx == 0) {
+                    $('#gpt_text').text(json1.improvement)
+                } else {
+                    $('#gpt_text').text(json2.improvement)
+                }
+                    })
                 })
             }
 
@@ -291,7 +308,7 @@
                 }
                 else{
                     //somebody chose something
-                    update(schools[idx].value)
+                    update(schools[0].value, schools[1].value, idx)
                 }
             }
         </script>
