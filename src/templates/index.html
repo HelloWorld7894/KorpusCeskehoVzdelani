@@ -32,6 +32,7 @@
                         <option value="e">e</option>
                         <option value="f">f</option>
                     </select>
+                    <button class="button" onclick="toggleTheme()">☽</button>
                 </div>
                         
                 <div style="display: flex; justify-content: space-between; padding: 25 20 10 20;">           
@@ -103,11 +104,10 @@
                 var options = {
                     region: "CZ",
                     resolution: "provinces",
-                    backgroundColor: "red",
                     colorAxis: {minValue: 0,  colors: ['#F4D8CD', '#F5295C']},
                     legend: "none",
                     keepAspectRatio: false,
-                    datalessRegionColor: "#503653",
+                    datalessRegionColor: "--color-tile",
                 };
 
                 var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
@@ -124,16 +124,40 @@
                 ]);
 
                 var options = {
-                    title: 'Company Performance',
-                    legend: { position: 'bottom' },
+                    hAxis: {
+                        title: 'Time',
+                        titleTextStyle: {
+                            color: "F4D8CD"
+                            },
+                        logScale: true,
+                            gridlines: {
+                            color: "F4D8CD"
+                            },
+                            textStyle: {
+                            color: "F4D8CD"
+                        },
+                        },
+                    vAxis: {
+                    title: 'Popularity',
+                    titleTextStyle: {
+                    color: "F4D8CD"
+                    },
+                    logScale: false,
+                        gridlines: {
+                        color: "F4D8CD"
+                        },
+                    },
+
+                    colors: ['4A20E4', 'F5295C'],
                     backgroundColor: {
                         fill: "#503653"
-          },
-          animation: {
-              easing: "out",
-            duration: 1000,
-            startup: true
-          },
+                    },
+                    animation: {
+                        easing: "out",
+                        duration: 1000,
+                        startup: true
+                    },
+                    lineWidth: 6,
                 };
 
                 var chart = new google.visualization.LineChart(document.getElementById('lines_div'));
@@ -172,16 +196,19 @@
                     gridlines: {
                         color: "transparent"
                     },
-                    title: 'Time of Day',
-                    format: 'h:mm a',
-                    viewWindow: {
-                        min: [7, 30, 0],
-                        max: [17, 30, 0]
-                    },
-                    titleTextStyle: {
-                        color: "F4D8CD",
-                        fontSize: 12
-                    }
+                        title: 'Time of Day',
+                        format: 'h:mm a',
+                        viewWindow: {
+                            min: [7, 30, 0],
+                            max: [17, 30, 0]
+                        },
+                        titleTextStyle: {
+                            color: "F4D8CD",
+                            fontSize: 12
+                        },
+                        textStyle: {
+                            color: "F4D8CD"
+                        }
                     },
                     vAxis: {
                     title: 'Rating (scale of 1-10)',
@@ -214,6 +241,29 @@
                 $(this).addClass('selected');
                 console.log($(this))
             });
+
+            function setTheme(themeName) {
+                localStorage.setItem('theme', themeName);
+                document.documentElement.className = themeName;
+                console.log(themeName)
+            }
+
+            function toggleTheme() {
+                if (localStorage.getItem('theme') === 'theme-dark') {
+                    setTheme('theme-light');
+                } else {
+                    setTheme('theme-dark');
+                }
+            }
+
+            // Immediately invoked function to set the theme on initial load
+            (function () {
+                if (localStorage.getItem('theme') === 'theme-dark') {
+                    setTheme('theme-dark');
+                } else {
+                    setTheme('theme-light');
+                }
+            })();
         </script>
     </body>
 </html>
