@@ -62,7 +62,6 @@ Tahle webová stránka slouží jako shrnutí českého školství pomocí mapy 
 
 * regionální statistiky region/okres/kraj/stat(<ins>UZEMI-KODY_obec_pou_orp_okres_kraj_region-stat.xlsx</ins>)
 
-* ****
 ## Inspirace na vykreslování
 
 * **geodata ČSÚ** ([geodata.statistika.cz](https://geodata.statistika.cz/portal/apps/sites/#/homepage)) - vizualizace dat a georeport
