@@ -1,4 +1,4 @@
-# SusiceHack
+# Korpus Českého Vzdělání
 ## Datové sady a jejich anotace
 
 ***Školství***
